@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Logo from './Logo.vue'
+import Menu from './Menu.vue'
 
 import { useAppStore } from '@/store'
 
@@ -15,10 +16,6 @@ const { isCollapse } = storeToRefs(appStore)
     :collapsed-width="64"
   >
     <Logo :is-collapse="isCollapse" />
-    <a-menu>
-      <a-menu-item key="1">
-        <span>nav1</span>
-      </a-menu-item>
-    </a-menu>
+    <Menu :is-collapse="isCollapse" />
   </a-layout-sider>
 </template>

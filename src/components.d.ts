@@ -5,6 +5,18 @@
 declare module 'vue' {
   export interface GlobalComponents {
     ADrawer: typeof import('ant-design-vue/es')['Drawer']
+    ADropdown: typeof import('ant-design-vue/es')['Dropdown']
+    AImage: typeof import('ant-design-vue/es')['Image']
+    ALayout: typeof import('ant-design-vue/es')['Layout']
+    ALayoutContent: typeof import('ant-design-vue/es')['LayoutContent']
+    ALayoutHeader: typeof import('ant-design-vue/es')['LayoutHeader']
+    ALayoutSider: typeof import('ant-design-vue/es')['LayoutSider']
+    AMenu: typeof import('ant-design-vue/es')['Menu']
+    AMenuDivider: typeof import('ant-design-vue/es')['MenuDivider']
+    AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
+    ASpace: typeof import('ant-design-vue/es')['Space']
+    ASubMenu: typeof import('ant-design-vue/es')['SubMenu']
+    ATooltip: typeof import('ant-design-vue/es')['Tooltip']
     GlobalSetting: typeof import('./components/GlobalSetting/index.vue')['default']
     TipIcon: typeof import('./components/TipIcon/index.vue')['default']
   }
