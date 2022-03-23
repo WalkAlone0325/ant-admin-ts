@@ -2,16 +2,15 @@
 import Logo from './Logo.vue'
 import Menu from './Menu.vue'
 
-import { useAppStore } from '@/store'
-
-const appStore = useAppStore()
-const { isCollapse } = storeToRefs(appStore)
+defineProps<{
+  isCollapse: boolean
+}>()
 </script>
 
 <template>
   <a-layout-sider
-    v-model:collapsed="isCollapse"
     collapsible
+    :collapsed="isCollapse"
     :trigger="null"
     :collapsed-width="64"
   >

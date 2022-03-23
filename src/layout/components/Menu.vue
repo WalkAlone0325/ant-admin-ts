@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  PieChartOutlined
-} from '@ant-design/icons-vue'
+import { PieChartOutlined } from '@ant-design/icons-vue'
 import SubMenu from './SubMenu.vue'
 import usePermission from '@/hooks/permission'
 import type { RouteRecordNormalized, RouteRecordRaw } from 'vue-router'
@@ -82,7 +78,6 @@ watch(
     v-model:selectedKeys="selectedKeys"
     mode="inline"
     theme="dark"
-    :inline-collapsed="isCollapse"
   >
     <template v-for="item in menuTree" :key="item.name">
       <template v-if="!item.children">
@@ -94,7 +89,7 @@ watch(
         </a-menu-item>
       </template>
       <template v-else>
-        <sub-menu :key="item.name" :menu-info="item" />
+        <sub-menu :key="item.name" :menu-info="item" @goto="goto" />
       </template>
     </template>
   </a-menu>

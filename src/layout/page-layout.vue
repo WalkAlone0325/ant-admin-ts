@@ -11,10 +11,10 @@ const { isCollapse } = storeToRefs(appStore)
 
 <template>
   <a-layout class="layout-container">
-    <SideBar />
+    <SideBar v-model:collapse="isCollapse" :is-collapse="isCollapse" />
 
     <a-layout>
-      <NavBar />
+      <NavBar :is-collapse="isCollapse" />
       <AppMain />
     </a-layout>
   </a-layout>

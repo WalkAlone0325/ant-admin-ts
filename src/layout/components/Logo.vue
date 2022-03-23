@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import logoImg from '@/assets/images/logo.png'
 
-defineProps({
-  isCollapse: Boolean
-})
+defineProps<{
+  isCollapse: boolean
+}>()
 </script>
 
 <template>

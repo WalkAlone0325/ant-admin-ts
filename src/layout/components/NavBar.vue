@@ -13,14 +13,17 @@ import { useFullscreen } from '@vueuse/core'
 import type { MenuProps } from 'ant-design-vue'
 import { message } from 'ant-design-vue'
 
+const props = defineProps<{
+  isCollapse: boolean
+}>()
+
 const avatarUrl =
   'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'
 
 const appStore = useAppStore()
-const { isCollapse } = storeToRefs(appStore)
 // collapse
 const toggleCollapse = () =>
-  appStore.updateSettings({ isCollapse: !isCollapse.value })
+  appStore.updateSettings({ isCollapse: !props.isCollapse })
 
 // 全屏
 const { toggle, isFullscreen, isSupported } = useFullscreen()
