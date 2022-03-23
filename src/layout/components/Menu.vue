@@ -63,8 +63,8 @@ watch(
     if (newVal.meta.requiresAuth) {
       const lastLen = newVal.matched.length - 1
       const key = newVal.matched[lastLen].name as string
-      // const openKey = newVal.matched[2].name as string
-      // openKeys.value = [openKey]
+      const openKey = newVal.matched[1].name as string
+      openKeys.value = [openKey]
       selectedKeys.value = [key]
     }
   },

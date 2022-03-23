@@ -16,6 +16,7 @@ defineEmits<{
   <a-sub-menu :key="menuInfo.name">
     <template #icon><MailOutlined /></template>
     <template #title>{{ menuInfo.meta?.title }}</template>
+
     <template v-for="item in menuInfo.children" :key="item.name">
       <template v-if="!item.children">
         <a-menu-item :key="item.name" @click="$emit('goto', item)">
