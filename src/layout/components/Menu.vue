@@ -83,7 +83,7 @@ watch(
       <template v-if="!item.children">
         <a-menu-item :key="item.name" @click="goto(item)">
           <template #icon>
-            <PieChartOutlined />
+            <component :is="item.meta.icon" />
           </template>
           {{ item.meta.title }}
         </a-menu-item>
