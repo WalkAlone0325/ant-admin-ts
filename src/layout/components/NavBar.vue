@@ -50,7 +50,7 @@ const dropOptions = ref<DropOption[]>([
 const handleClickItem: MenuProps['onClick'] = ({ key }) => {
   switch (key) {
     case 1:
-      appStore.updateSettings({ openSetting: true })
+      appStore.updateSettings({ showDrawer: true })
       break
   }
 }

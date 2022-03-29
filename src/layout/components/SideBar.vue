@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { Ref } from 'vue'
 import Logo from './Logo.vue'
 import Menu from './Menu.vue'
 

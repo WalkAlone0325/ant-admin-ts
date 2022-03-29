@@ -1,5 +1,7 @@
+import type { DefineConfig } from '@/config/defineConfig'
 export interface AppState {
   isCollapse: boolean
-  openSetting: boolean
+  showDrawer: boolean
+  settings: DefineConfig
   // [key: string]: unknown
 }

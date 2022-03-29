@@ -22,13 +22,14 @@ export default defineConfig({
       resolvers: [AntDesignVueResolver()]
     })
   ],
-  // css: {
-  // preprocessorOptions: {
-  // less: {
-  // additionalData: ``
-  // }
-  // }
-  // },
+  css: {
+    preprocessorOptions: {
+      less: {
+        // additionalData: ``
+        javascriptEnabled: true
+      }
+    }
+  },
   resolve: {
     alias: [
       {

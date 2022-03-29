@@ -4,9 +4,21 @@ import NavBar from './components/NavBar.vue'
 import AppMain from './components/AppMain.vue'
 
 import { useAppStore } from '@/store'
+import type { AppState } from '@/store/modules/app/types'
 
 const appStore = useAppStore()
-const { isCollapse } = storeToRefs(appStore)
+const { isCollapse, showDrawer, settings } = storeToRefs(appStore)
+
+const handleSettingChange = ({
+  type,
+  value
+}: {
+  type: Partial<AppState>
+  value: boolean | undefined | string
+}) => {
+  console.log(type, value)
+  type && appStore.updateSettings({ type, value } as Partial<AppState>)
+}
 </script>
 
 <template>
@@ -17,5 +29,11 @@ const { isCollapse } = storeToRefs(appStore)
       <NavBar :is-collapse="isCollapse" />
       <AppMain />
     </a-layout>
+    <SettingDrawer
+      :setting="settings"
+      :show="showDrawer"
+      @update:show="appStore.updateSettings({ showDrawer: !showDrawer })"
+      @change="handleSettingChange"
+    />
   </a-layout>
 </template>
