@@ -5,7 +5,7 @@ import usePermission from '@/hooks/permission'
 import type { RouteRecordNormalized, RouteRecordRaw } from 'vue-router'
 
 defineProps<{
-  isCollapse: boolean
+  isCollapse?: boolean
 }>()
 
 const permission = usePermission()

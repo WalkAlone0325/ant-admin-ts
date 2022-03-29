@@ -12,6 +12,7 @@ import {
 import { useFullscreen } from '@vueuse/core'
 import type { MenuProps } from 'ant-design-vue'
 import { message } from 'ant-design-vue'
+import Menu from './Menu.vue'
 
 const props = defineProps<{
   isCollapse: boolean
@@ -58,12 +59,14 @@ const handleClickItem: MenuProps['onClick'] = ({ key }) => {
 
 <template>
   <a-layout-header>
-    <menu-unfold-outlined
-      v-if="isCollapse"
-      class="trigger"
-      @click="toggleCollapse"
-    />
-    <menu-fold-outlined v-else class="trigger" @click="toggleCollapse" />
+    <div class="trigger-container">
+      <menu-unfold-outlined
+        v-if="isCollapse"
+        class="trigger"
+        @click="toggleCollapse"
+      />
+      <menu-fold-outlined v-else class="trigger" @click="toggleCollapse" />
+    </div>
 
     <div class="right-toolbar">
       <a-space size="middle" style="font-size: 20px">
