@@ -23,6 +23,16 @@ export const useAppStore = defineStore('app', {
   actions: {
     updateSettings(partial: Partial<AppState>) {
       this.$patch(partial)
+    },
+    changeSetting(type: any, val: any) {
+      this.$patch({
+        settings: {
+          [type]: val
+        }
+      })
+      // if (type in defaultSettings) {
+      //   this.settings[type] = val
+      // }
     }
   }
 })

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { CheckOutlined } from '@ant-design/icons-vue'
 import type { Item } from './index.vue'
 
 interface PropsColor {
@@ -6,13 +7,23 @@ interface PropsColor {
   colors: Item[]
   value: string
 }
+interface EmitColor {
+  (e: 'change', key: string): void
+}
 
 const props = defineProps<PropsColor>()
+const emit = defineEmits<EmitColor>()
 
 // const themeKey = genThemeToString(item.key.toUpperCase())
-const check = true
 // value.toUpperCase() === item.key.toUpperCase() ||
 // genThemeToString(value.toUpperCase()) === item.key.toUpperCase()
+
+const handleChange = (key: string) => {
+  emit('change', key)
+}
+const check = (item: Item) => {
+  return props.value.toUpperCase() === item.key.toUpperCase()
+}
 </script>
 
 <template>
@@ -21,15 +32,16 @@ const check = true
     <div class="theme-color-content">
       <a-tooltip
         v-for="item in colors"
-        :key="item.color.toUpperCase()"
+        :key="item.color?.toUpperCase()"
         :title="item.key.toUpperCase()"
       >
         <div
           class="theme-color-block"
           :style="{ backgroundColor: item.color }"
-          :color="item.color.toUpperCase()"
+          :color="item.color?.toUpperCase()"
+          @click="handleChange(item.key.toUpperCase())"
         >
-          <check-outlined v-if="check" />
+          <CheckOutlined v-if="check(item)" />
         </div>
       </a-tooltip>
     </div>

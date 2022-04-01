@@ -14,6 +14,7 @@
 
 export interface DefineConfig {
   theme?: 'dark' | 'light' | 'realDark'
+  // | 'realDark'
   primaryColor: string
   layout?: 'sidemenu' | 'topmenu'
   contentWidth?: 'Fluid' | 'Fixed'

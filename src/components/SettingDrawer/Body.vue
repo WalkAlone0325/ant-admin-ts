@@ -16,7 +16,7 @@ defineProps<PropsBody>()
 <style lang="less" scoped>
 .title {
   margin-bottom: 12px;
-  // color: @heading-color;
+  color: @heading-color;
   font-size: 14px;
   line-height: 22px;
 }

@@ -59,7 +59,7 @@ const handleChange = (key: Item['key']) => {
   &-item {
     position: relative;
     margin-right: 16px;
-    // border-radius: @border-radius-base;
+    border-radius: @border-radius-base;
     cursor: pointer;
 
     img {
@@ -74,13 +74,12 @@ const handleChange = (key: Item['key']) => {
     height: 100%;
     padding-top: 15px;
     padding-left: 24px;
-    // color: @primary-color;
+    color: @primary-color;
     font-weight: bold;
     font-size: 14px;
 
     .action {
-      // color: @primary-color;
-      color: aqua;
+      color: @primary-color;
     }
   }
 }

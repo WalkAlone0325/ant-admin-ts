@@ -4,10 +4,12 @@ import Body from './Body.vue'
 import BlockCheckbox from './BlockCheckbox.vue'
 import ThemeColor from './ThemeColor.vue'
 import LayoutSetting from './LayoutSetting.vue'
+import themePluginConfig from '@/config/themePluginConfig'
 
 export interface Item {
-  color: string
+  color?: string
   key: string
+  theme?: string
 }
 
 const props = defineProps<{
@@ -29,7 +31,7 @@ const showDrawer = computed<boolean>({
   }
 })
 
-const changeSetting = (type: string, value: any) => {
+const changeSetting = (type: any, value: any) => {
   emit('change', { type, value })
   // handleChangeSetting(type, value, false)
 }
@@ -46,46 +48,72 @@ const changeSetting = (type: string, value: any) => {
 //   console.log('first')
 // }
 
-const themeList = [
-  {
-    key: 'light',
-    url: 'https://gw.alipayobjects.com/zos/antfincdn/NQ%24zoisaD2/jpRkZQMyYRryryPNtyIC.svg',
-    title: '亮色菜单风格' || 'app.setting.pagestyle.light'
-  },
-  {
-    key: 'dark',
-    url: 'https://gw.alipayobjects.com/zos/antfincdn/XwFOFbLkSM/LCkqqYNmvBEbokSDscrm.svg',
-    title: '暗色菜单风格' || 'app.setting.pagestyle.dark'
-  },
-  {
-    key: 'realDark',
-    url: 'https://gw.alipayobjects.com/zos/antfincdn/hmKaLQvmY2/LCkqqYNmvBEbokSDscrm.svg',
-    title: '暗黑模式风格' || 'app.setting.pagestyle.realdark'
-  }
-]
+const getThemeList = () => {
+  const list = themePluginConfig.theme || []
 
-const darkColorList = [
-  {
-    key: '#1890ff',
-    color: '#1890ff',
-    theme: 'dark'
-  }
-]
+  const themeList = [
+    {
+      key: 'light',
+      url: 'https://gw.alipayobjects.com/zos/antfincdn/NQ%24zoisaD2/jpRkZQMyYRryryPNtyIC.svg',
+      title: '亮色菜单风格' || 'app.setting.pagestyle.light'
+    },
+    {
+      key: 'dark',
+      url: 'https://gw.alipayobjects.com/zos/antfincdn/XwFOFbLkSM/LCkqqYNmvBEbokSDscrm.svg',
+      title: '暗色菜单风格' || 'app.setting.pagestyle.dark'
+    }
+  ]
 
-const lightColorList = [
-  {
-    key: '#1890ff',
-    color: '#1890ff',
-    theme: 'dark'
-  }
-]
+  const darkColorList: Item[] = [
+    {
+      key: '#1890ff',
+      color: '#1890ff',
+      theme: 'dark'
+    }
+  ]
 
-const colorList = {
-  dark: darkColorList,
-  light: lightColorList
+  const lightColorList: Item[] = [
+    {
+      key: '#1890ff',
+      color: '#1890ff',
+      theme: 'dark'
+    }
+  ]
+
+  if (list.find((item) => item.theme === 'dark')) {
+    themeList.push({
+      key: 'realDark',
+      url: 'https://gw.alipayobjects.com/zos/antfincdn/hmKaLQvmY2/LCkqqYNmvBEbokSDscrm.svg',
+      title: '暗黑模式风格' || 'app.setting.pagestyle.realdark'
+    })
+  }
+
+  list.forEach((item) => {
+    const color = (item.modifyVars || {})['@primary-color']
+    if (!item.theme || item.theme === 'light') {
+      lightColorList.push({
+        color,
+        ...item
+      })
+    }
+    if (item.theme === 'dark' && color) {
+      darkColorList.push({
+        color,
+        ...item
+      })
+    }
+  })
+
+  return {
+    colorList: {
+      dark: darkColorList,
+      light: lightColorList
+    },
+    themeList
+  }
 }
 
-const colors: Item[] = [{ color: '', key: '' }]
+const themeList = getThemeList()
 </script>
 
 <template>
@@ -93,7 +121,7 @@ const colors: Item[] = [{ color: '', key: '' }]
     <div>
       <Body title="整体风格设置">
         <BlockCheckbox
-          :list="themeList"
+          :list="themeList.themeList"
           :value="setting.theme"
           @change="(val) => changeSetting('theme', val)"
         />
@@ -101,7 +129,9 @@ const colors: Item[] = [{ color: '', key: '' }]
 
       <ThemeColor
         title="主题色"
-        :colors="colorList[setting.theme === 'realDark' ? 'dark' : 'light']"
+        :colors="
+          themeList.colorList[setting.theme === 'realDark' ? 'dark' : 'light']
+        "
         :value="setting.primaryColor"
         @change="(color) => changeSetting('primaryColor', color)"
       />
@@ -115,7 +145,7 @@ const colors: Item[] = [{ color: '', key: '' }]
         />
       </Body>
 
-      <LayoutSetting />
+      <!-- <LayoutSetting /> -->
     </div>
   </a-drawer>
 </template>

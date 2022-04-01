@@ -25,7 +25,10 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       less: {
-        // additionalData: ``
+        additionalData: `@import "${resolve(
+          __dirname,
+          'src/style/index.less'
+        )}";`,
         javascriptEnabled: true
       }
     }

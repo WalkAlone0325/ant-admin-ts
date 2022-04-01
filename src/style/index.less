@@ -1,4 +1,4 @@
-// @import 'ant-design-vue/es/style/themes/default.less';
+@import 'ant-design-vue/es/style/themes/default.less';
 
 * {
   box-sizing: border-box;
@@ -43,20 +43,22 @@ h7 {
   }
 
   .ant-menu {
-    min-width: 64px;
-    max-width: 200px;
+    // min-width: 64px;
+    // max-width: 200px;
     border-right: none !important;
   }
 
-  .ant-layout-header {
+  .ant-layout-header { 
     display: inline-flex;
+    justify-content: center;
     align-items: center;
     width: 100%;
     height: 50px;
     line-height: 50px;
     padding: 0;
     position: relative;
-    background-color: #fff;
+    background-color: #ffffff;
+    transition: background .3s,width .2s;
 
     .trigger-container {
       width: 100%;

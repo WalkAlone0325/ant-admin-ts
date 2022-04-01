@@ -3,10 +3,20 @@ import { PieChartOutlined } from '@ant-design/icons-vue'
 import SubMenu from './SubMenu.vue'
 import usePermission from '@/hooks/permission'
 import type { RouteRecordNormalized, RouteRecordRaw } from 'vue-router'
+import type { MenuMode, MenuTheme } from 'ant-design-vue'
 
-defineProps<{
-  isCollapse?: boolean
-}>()
+const props = withDefaults(
+  defineProps<{
+    isCollapse?: boolean
+    mode?: MenuMode
+    theme?: MenuTheme
+  }>(),
+  {
+    isCollapse: false,
+    mode: 'inline',
+    theme: 'dark'
+  }
+)
 
 const permission = usePermission()
 const route = useRoute()
@@ -58,6 +68,15 @@ const goto = (item: RouteRecordRaw) => {
 }
 
 watch(
+  () => props.mode,
+  (val) => {
+    if (val === 'horizontal') {
+      openKeys.value = []
+    }
+  }
+)
+
+watch(
   route,
   (newVal) => {
     if (newVal.meta.requiresAuth) {
@@ -76,8 +95,8 @@ watch(
   <a-menu
     v-model:openKeys="openKeys"
     v-model:selectedKeys="selectedKeys"
-    mode="inline"
-    theme="dark"
+    :theme="theme"
+    :mode="mode"
   >
     <template v-for="item in menuTree" :key="item.name">
       <template v-if="!item.children">
