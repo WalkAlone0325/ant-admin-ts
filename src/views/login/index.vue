@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { message } from 'ant-design-vue'
+
+const router = useRouter()
+
 const loginForm = reactive({
   username: '',
   password: ''
@@ -7,6 +11,14 @@ const loginRules = reactive({
   username: [{}],
   password: [{}]
 })
+
+const login = () => {
+  if (!loginForm.username || !loginForm.password) {
+    message.error('请输入用户名和密码')
+  } else {
+    router.push('/dashboard')
+  }
+}
 </script>
 
 <template>
@@ -20,7 +32,7 @@ const loginRules = reactive({
         <a-input v-model:value="loginForm.password" placeholder="请输入密码" />
       </a-form-item>
       <a-form-item style="width: 100%">
-        <a-button style="width: 100%" type="primary" html-type="submit">
+        <a-button style="width: 100%" type="primary" html-type="submit" @click="login">
           登录
         </a-button>
       </a-form-item>

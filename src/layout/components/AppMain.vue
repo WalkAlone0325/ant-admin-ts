@@ -1,5 +1,6 @@
 <template>
   <a-layout-content
+    class="layout-content"
     :style="{
       margin: '24px 16px',
       padding: '24px',
@@ -11,7 +12,7 @@
         <router-view v-slot="{ Component, route }">
           <transition name="fade" mode="out-in">
             <keep-alive>
-              <div>
+              <div class="app-content">
                 <!-- multi root component warning -->
                 <component :is="Component" :key="route.path" />
               </div>
@@ -22,3 +23,13 @@
     </Suspense>
   </a-layout-content>
 </template>
+
+<style lang="less" scoped>
+.layout-content {
+  max-height: calc(100vh - 50px);
+
+  .app-content {
+    height: 100%;
+  }
+}
+</style>
